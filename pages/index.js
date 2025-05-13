@@ -7,16 +7,6 @@ import Layout from "@/components/Layout";
 import utilStyles from "@/styles/utils.module.css";
 import { getSortedPostsData } from "@/lib/post";
 
-//SSGの場合
-export async function getStaticProps() {
-  const allPostsData = getSortedPostsData();//id,title,date,thumbnail
-  console.log(allPostsData);
-  return {
-    props: {
-      allPostsData
-    }
-  }
-}
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,6 +18,26 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+//SSGの場合
+export async function getStaticProps() {
+  const allPostsData = await getSortedPostsData();//id,title,date,thumbnail
+  console.log(allPostsData);
+  return {
+    props: {
+      allPostsData
+    }
+  }
+}
+
+// //SSRの場合
+// export async function getServerSideProps(context) {
+//   const allPostsData = getSortedPostsData();
+//   return {
+//     props: {
+//       allPostsData
+//     }
+//   }
+// }
 export default function Home({ allPostsData }) {
   return (
     <Layout>
@@ -40,66 +50,33 @@ export default function Home({ allPostsData }) {
       <section>
         <h2 className={utilStyles.headingLg}>📝エンジニアのブログ</h2>
         <div className={styles.grid}>
-          <article>
-            <Link href="/">
+          {allPostsData.map(({ id, date, title, thumbnail }) => (
+            <article key={id}>
+              <Link href={`/posts/${id}`}>
+                <img src={thumbnail} className={styles.thumbnailImage} />
+              </Link>
+              <Link href={`/posts/${id}`} className={utilStyles.boldText}>
+                {title}
+              </Link>
+              <br />
+              <small className={utilStyles.lightText}>
+                {date}
+              </small>
+            </article>
+          ))}
+          {/* <article>
+            <Link href="/posts">
               <img src="/images/thumbnail01-230227-162936.jpg" className={styles.thumbnailImage} />
             </Link>
-            <Link href="/" className={utilStyles.boldText}>
+            <Link href="/posts" className={utilStyles.boldText}>
               SSGとSSRの使い分け
             </Link>
             <br />
             <small className={utilStyles.lightText}>
               May 13, 2025
             </small>
-          </article>
-          <article>
-            <Link href="/">
-              <img src="/images/thumbnail01-230227-162936.jpg" className={styles.thumbnailImage} />
-            </Link>
-            <Link href="/" className={utilStyles.boldText}>
-              SSGとSSRの使い分け
-            </Link>
-            <br />
-            <small className={utilStyles.lightText}>
-              May 13, 2025
-            </small>
-          </article>
-          <article>
-            <Link href="/">
-              <img src="/images/thumbnail01-230227-162936.jpg" className={styles.thumbnailImage} />
-            </Link>
-            <Link href="/" className={utilStyles.boldText}>
-              SSGとSSRの使い分け
-            </Link>
-            <br />
-            <small className={utilStyles.lightText}>
-              May 13, 2025
-            </small>
-          </article>
-          <article>
-            <Link href="/">
-              <img src="/images/thumbnail01-230227-162936.jpg" className={styles.thumbnailImage} />
-            </Link>
-            <Link href="/" className={utilStyles.boldText}>
-              SSGとSSRの使い分け
-            </Link>
-            <br />
-            <small className={utilStyles.lightText}>
-              May 13, 2025
-            </small>
-          </article>
-          <article>
-            <Link href="/">
-              <img src="/images/thumbnail01-230227-162936.jpg" className={styles.thumbnailImage} />
-            </Link>
-            <Link href="/" className={utilStyles.boldText}>
-              SSGとSSRの使い分け
-            </Link>
-            <br />
-            <small className={utilStyles.lightText}>
-              May 13, 2025
-            </small>
-          </article>
+          </article> */}
+          
         </div>
       </section>
     </Layout>
