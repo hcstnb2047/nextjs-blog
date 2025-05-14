@@ -6,7 +6,7 @@ import styles from "@/styles/Home.module.css";
 import Layout from "@/components/Layout";
 import utilStyles from "@/styles/utils.module.css";
 import { getSortedPostsData } from "@/lib/post";
-
+import { siteTitle } from "@/components/Layout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,7 +40,10 @@ export async function getStaticProps() {
 // }
 export default function Home({ allPostsData }) {
   return (
-    <Layout>
+    <Layout home>
+      <Head>
+        <title>{siteTitle}</title>
+      </Head>
       <section className={utilStyles.headingMd}>
         <p>
           私はSIer勤務のシステムエンジニアです。趣味で個人開発をしており、フロントエンドの勉強中です。

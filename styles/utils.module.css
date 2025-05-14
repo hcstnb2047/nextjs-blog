@@ -31,6 +31,8 @@
   
   .borderCircle {
     border-radius: 1000px;
+    object-fit: cover;
+    object-position: center;
   }
   
   .colorInherit {
