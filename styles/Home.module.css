@@ -1,36 +1,248 @@
-.container {
-  padding: 0 2rem;
+.pageHeader {
+  margin-bottom: 3rem;
 }
 
-.main {
-  min-height: 100vh;
-  padding: 4rem 0;
-  flex: 1;
+.pageTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: var(--notion-text);
+}
+
+.pageDescription {
+  font-size: 1rem;
+  color: var(--notion-text-secondary);
+  margin: 0;
+}
+
+.viewToggle {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  gap: 8px;
+  margin-bottom: 2rem;
+  padding: 4px;
+  background: var(--notion-bg-secondary);
+  border-radius: 6px;
+  width: fit-content;
 }
 
-.thumbnailImage {
-  width: 950px;
-  height: 400px;
-  margin-bottom: 20px;
-  box-shadow: 4px 5px 12px black;
-  transition: all 0.3s;
+.viewButton {
+  padding: 6px 12px;
+  border: none;
+  background: transparent;
+  color: var(--notion-text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: var(--notion-transition);
+}
+
+.viewButton:hover {
+  background: var(--notion-bg-hover);
+  color: var(--notion-text);
+}
+
+.viewButton.active {
+  background: var(--notion-bg);
+  color: var(--notion-text);
+  box-shadow: var(--notion-shadow-sm);
+}
+
+.postsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  margin-top: 1rem;
+}
+
+.postCard {
+  background: var(--notion-bg);
+  border: 1px solid var(--notion-border);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: var(--notion-transition);
   cursor: pointer;
 }
 
-.thumbnailImage:hover {
-  transform: translate(4px, 5px);
-  box-shadow: none;
+.postCard:hover {
+  background: var(--notion-bg-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--notion-shadow);
 }
 
-.grid {
-  display: grid;
+.postThumbnail {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 1px solid var(--notion-border);
+}
+
+.postContent {
+  padding: 16px;
+}
+
+.postTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--notion-text);
+  margin: 0 0 8px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.postDate {
+  font-size: 14px;
+  color: var(--notion-text-tertiary);
+}
+
+.postsList {
+  margin-top: 1rem;
+  background: var(--notion-bg);
+  border: 1px solid var(--notion-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.postListItem {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--notion-border);
+  transition: var(--notion-transition);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.postListItem:last-child {
+  border-bottom: none;
+}
+
+.postListItem:hover {
+  background: var(--notion-bg-hover);
+  text-decoration: none;
+}
+
+.postListIcon {
+  width: 20px;
+  height: 20px;
+  margin-right: 16px;
+  flex-shrink: 0;
+  color: var(--notion-text-tertiary);
+}
+
+.postListContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.postListTitle {
+  font-size: 15px;
+  color: var(--notion-text);
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.postListDate {
+  font-size: 13px;
+  color: var(--notion-text-tertiary);
+  margin: 0;
+}
+
+.postListMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.postListStats {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--notion-text-secondary);
+}
+
+.controlsRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
   flex-wrap: wrap;
-  max-width: 1200px;
-  gap: 40px;
-  margin: 0 auto;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1rem;
+}
+
+.sourceToggle {
+  display: flex;
+  gap: 8px;
+  padding: 4px;
+  background: var(--notion-bg-secondary);
+  border-radius: 6px;
+}
+
+.sourceButton {
+  padding: 6px 12px;
+  border: none;
+  background: transparent;
+  color: var(--notion-text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: var(--notion-transition);
+}
+
+.sourceButton:hover:not(:disabled) {
+  background: var(--notion-bg-hover);
+  color: var(--notion-text);
+}
+
+.sourceButton.active {
+  background: var(--notion-bg);
+  color: var(--notion-text);
+  box-shadow: var(--notion-shadow-sm);
+}
+
+.sourceButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.qiitaThumbnail {
+  width: 100%;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--notion-bg-secondary);
+  border-bottom: 1px solid var(--notion-border);
+}
+
+.qiitaLogo {
+  width: 80px;
+  height: 80px;
+}
+
+.postMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.qiitaStats {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--notion-text-secondary);
+}
+
+.statItem {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
