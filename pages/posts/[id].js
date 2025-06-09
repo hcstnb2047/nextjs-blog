@@ -1,5 +1,5 @@
 import Layout from "@/components/Layout";
-import { getAllPostIds, getPostData, getSortedPostsData } from "@/lib/post";
+import { getAllPostIds, getPostData } from "@/lib/post";
 import { getStaticQiitaArticles } from "@/lib/qiita";
 import { siteConfig } from "@/config/site";
 import Link from "next/link";
